@@ -9,14 +9,19 @@
 (def overlapping2 {:name "Overlapping 2"
                    :description "Starts during ends during"
                    :start-time (t/today-at 10 15) :end-time (t/today-at 10 30)})
+
+(def overlapping3 {:name "Overlapping 3" :start-time (t/today-at 13 00) :end-time (t/today-at 14 00)})
+(def overlapping4 {:name "Overlapping 4" :start-time (t/today-at 12 15) :end-time (t/today-at 16 01)})
              
-(def events [event1 overlapping1 overlapping2])
+(def events [event1 overlapping1 overlapping2 overlapping3 overlapping4])
 
 (deftest overlapping?-test
   (testing "do two events overlap"
     (is (true? (core/overlapping? overlapping1 overlapping2))))
   (testing "events that do not overlap"
-    (is (false? (core/overlapping? event1 overlapping2)))))  
+    (is (false? (core/overlapping? event1 overlapping2))))
+  (testing "Same event"
+    (is (false? (core/overlapping? event1 event1)))))
 
 
 (deftest get-overlapping-test
@@ -27,6 +32,12 @@
     (is (= []
            (core/get-overlapping events event1)
            ))))
+
+(deftest get-overlapping-test
+  (testing "Given a list of events return all overlapping sets"
+    (is (=  [[overlapping1 overlapping2]
+             [overlapping4 overlapping3]]
+            (core/all-overlapping events)))))
 
   
 
