@@ -7,3 +7,7 @@
         {st2 :start-time
          et2 :end-time} event2]
     (t/overlaps? st1 et1 st2 et2)))
+
+(defn get-overlapping [events event]
+  (->> events
+      (filter #(overlapping? event %))))

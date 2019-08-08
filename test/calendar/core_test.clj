@@ -10,9 +10,23 @@
                    :description "Starts during ends during"
                    :start-time (t/today-at 10 15) :end-time (t/today-at 10 30)})
              
+(def events [event1 overlapping1 overlapping2])
 
-(deftest overlapping-test
+(deftest overlapping?-test
   (testing "do two events overlap"
     (is (true? (core/overlapping? overlapping1 overlapping2))))
   (testing "events that do not overlap"
     (is (false? (core/overlapping? event1 overlapping2)))))  
+
+
+(deftest get-overlapping-test
+  (testing "Given a list of events and an over lapping event get the other overlapping"
+    (is (= [overlapping1 overlapping2]
+           (core/get-overlapping events overlapping1))))
+  (testing "Given a list of events and an event with no overlapping"
+    (is (= []
+           (core/get-overlapping events event1)
+           ))))
+
+  
+
