@@ -26,7 +26,7 @@
 
 (deftest get-overlapping-test
   (testing "Given a list of events and an over lapping event get the other overlapping"
-    (is (= [overlapping1 overlapping2]
+    (is (= [overlapping2]
            (core/get-overlapping events overlapping1))))
   (testing "Given a list of events and an event with no overlapping"
     (is (= []
