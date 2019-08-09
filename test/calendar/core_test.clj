@@ -33,7 +33,7 @@
            (core/get-overlapping events event1)
            ))))
 
-(deftest get-overlapping-test
+(deftest get-all-overlapping-test
   (testing "Given a list of events return all overlapping sets"
     (is (=  [[overlapping1 overlapping2]
              [overlapping4 overlapping3]]
